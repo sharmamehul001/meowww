@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry Ka Paper 😼🔥</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:radial-gradient(circle at center,#3a0ca3,#000814);
+    height:100vh;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+/* Glow */
+body::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle,#ff006e,transparent 70%);
+    filter:blur(150px);
+    animation:moveGlow 6s infinite alternate;
+}
+
+@keyframes moveGlow{
+    from{transform:translate(-20%, -10%);}
+    to{transform:translate(30%, 20%);}
+}
+
+.container{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+h1{
+    font-size:50px;
+    font-weight:900;
+    background:linear-gradient(45deg,#ff006e,#ffbe0b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:30px;
+}
+
+.dialogue{
+    width:80%;
+    max-width:700px;
+    margin:20px auto;
+    padding:30px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 35px rgba(255,0,110,0.4);
+    font-size:22px;
+    line-height:1.6;
+}
+
+.hero{
+    color:#00f5d4;
+    text-shadow:0 0 15px #00f5d4;
+    font-weight:700;
+}
+
+.meow{
+    font-size:40px;
+    color:#ffbe0b;
+    margin-top:10px;
+    display:block;
+}
+
+button{
+    margin-top:25px;
+    padding:14px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(45deg,#ff006e,#8338ec);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px #ff006e;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+@keyframes shake{
+    0%{transform:translate(0,0);}
+    25%{transform:translate(5px,-5px);}
+    50%{transform:translate(-5px,5px);}
+    75%{transform:translate(5px,5px);}
+    100%{transform:translate(0,0);}
+}
+
+.shake{
+    animation:shake 0.5s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🧪 CHEMISTRY KA PAPER 🔥</h1>
+
+    <div class="dialogue">
+        (Veer )<br><br>
+        Bhai kal chemistry ka paper hai…<br>
+        Kal kya hoga?? 😭
+    </div>
+
+    <div class="dialogue hero">
+        😎 :<br><br>
+        <span id="typing"></span>
+        <span class="meow" id="meowText"></span>
+    </div>
+
+    <button onclick="heroMoment()">😼 My answer  🔥</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="sound" src="audio.mp3"></audio>
+
+<script>
+let text = "Maine kaha LADLAAAAAA.... 😎";
+let i = 0;
+
+function heroMoment(){
+
+    let typing = document.getElementById("typing");
+    let meow = document.getElementById("meowText");
+    let sound = document.getElementById("sound");
+
+    typing.innerHTML="";
+    meow.innerHTML="";
+    i=0;
+
+    // play audio
+    sound.currentTime = 0;
+    sound.play();
+
+    let interval = setInterval(()=>{
+        if(i < text.length){
+            typing.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+
+            setTimeout(()=>{
+                meow.innerHTML="Meowww 😼🐱🔥 Ghoop Ghoop";
+                document.body.classList.add("shake");
+                setTimeout(()=>document.body.classList.remove("shake"),500);
+            },800);
+        }
+    },120);
+}
+</script>
+
+</body>
+</html>
