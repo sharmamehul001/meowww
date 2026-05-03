@@ -2,167 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chemistry Ka Paper 😼🔥</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Insta Class Viewer</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-    font-family:'Poppins',sans-serif;
-    background:radial-gradient(circle at center,#3a0ca3,#000814);
-    height:100vh;
-    overflow:hidden;
-    color:white;
-    text-align:center;
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    text-align: center;
+    margin: 0;
 }
 
-/* Glow */
-body::before{
-    content:"";
-    position:absolute;
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle,#ff006e,transparent 70%);
-    filter:blur(150px);
-    animation:moveGlow 6s infinite alternate;
+.container {
+    margin-top: 80px;
 }
 
-@keyframes moveGlow{
-    from{transform:translate(-20%, -10%);}
-    to{transform:translate(30%, 20%);}
+input {
+    padding: 12px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 250px;
 }
 
-.container{
-    position:relative;
-    top:50%;
-    transform:translateY(-50%);
+button {
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #00ffd5;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-h1{
-    font-size:50px;
-    font-weight:900;
-    background:linear-gradient(45deg,#ff006e,#ffbe0b);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:30px;
+button:hover {
+    background: #00c9a7;
 }
 
-.dialogue{
-    width:80%;
-    max-width:700px;
-    margin:20px auto;
-    padding:30px;
-    border-radius:25px;
-    background:rgba(255,255,255,0.06);
-    backdrop-filter:blur(15px);
-    box-shadow:0 0 35px rgba(255,0,110,0.4);
-    font-size:22px;
-    line-height:1.6;
+.hidden {
+    display: none;
 }
 
-.hero{
-    color:#00f5d4;
-    text-shadow:0 0 15px #00f5d4;
-    font-weight:700;
+.class-btn {
+    display: block;
+    margin: 10px auto;
+    width: 220px;
 }
 
-.meow{
-    font-size:40px;
-    color:#ffbe0b;
-    margin-top:10px;
-    display:block;
-}
-
-button{
-    margin-top:25px;
-    padding:14px 35px;
-    font-size:18px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(45deg,#ff006e,#8338ec);
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 0 20px #ff006e;
-}
-
-button:hover{
-    transform:scale(1.1);
-}
-
-@keyframes shake{
-    0%{transform:translate(0,0);}
-    25%{transform:translate(5px,-5px);}
-    50%{transform:translate(-5px,5px);}
-    75%{transform:translate(5px,5px);}
-    100%{transform:translate(0,0);}
-}
-
-.shake{
-    animation:shake 0.5s;
+#dataBox p {
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    margin: 8px auto;
+    width: 200px;
+    border-radius: 8px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>🧪 CHEMISTRY KA PAPER 🔥</h1>
-
-    <div class="dialogue">
-        (Veer )<br><br>
-        Bhai kal chemistry ka paper hai…<br>
-        Kal kya hoga?? 😭
-    </div>
-
-    <div class="dialogue hero">
-        😎 :<br><br>
-        <span id="typing"></span>
-        <span class="meow" id="meowText"></span>
-    </div>
-
-    <button onclick="heroMoment()">😼 My answer  🔥</button>
+<!-- LOGIN PAGE -->
+<div class="container" id="loginPage">
+    <h2>Enter Your Details</h2>
+    <input type="text" id="name" placeholder="Enter your name"><br>
+    <input type="text" id="insta" placeholder="Enter your Insta ID"><br>
+    <button onclick="submitForm()">Submit</button>
 </div>
 
-<!-- AUDIO -->
-<audio id="sound" src="audio.mp3"></audio>
+<!-- CLASS PAGE -->
+<div class="container hidden" id="classPage">
+    <h2>Select Your Class</h2>
+
+    <button class="class-btn" onclick="showData(8)">Class 8</button>
+    <button class="class-btn" onclick="showData(9)">Class 9</button>
+    <button class="class-btn" onclick="showData(10)">Class 10</button>
+    <button class="class-btn" onclick="showData(11)">Class 11</button>
+    <button class="class-btn" onclick="showData(12)">Class 12</button>
+
+</div>
+
+<!-- DATA PAGE -->
+<div class="container hidden" id="dataPage">
+    <h2>Students Insta IDs</h2>
+    <div id="dataBox"></div>
+    <button onclick="goBack()">⬅ Back</button>
+</div>
 
 <script>
-let text = "Maine kaha LADLAAAAAA.... 😎";
-let i = 0;
 
-function heroMoment(){
+// 🔥 DATA (Tu yaha apni IDs add kar sakta hai)
+const classData = {
+    8: ["@class8_user1", "@class8_user2"],
+    9: ["@class9_user1"],
+    10: ["@class10_user1"],
+    11: ["@class11_user1"],
+    12: ["@mehull_sharma27"] // 👈 TERI ID DAL DI
+};
 
-    let typing = document.getElementById("typing");
-    let meow = document.getElementById("meowText");
-    let sound = document.getElementById("sound");
+function submitForm() {
+    let name = document.getElementById("name").value;
+    let insta = document.getElementById("insta").value;
 
-    typing.innerHTML="";
-    meow.innerHTML="";
-    i=0;
+    if (name === "" || insta === "") {
+        alert("Please fill all fields!");
+        return;
+    }
 
-    // play audio
-    sound.currentTime = 0;
-    sound.play();
-
-    let interval = setInterval(()=>{
-        if(i < text.length){
-            typing.innerHTML += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(interval);
-
-            setTimeout(()=>{
-                meow.innerHTML="Meowww 😼🐱🔥 Ghoop Ghoop";
-                document.body.classList.add("shake");
-                setTimeout(()=>document.body.classList.remove("shake"),500);
-            },800);
-        }
-    },120);
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("classPage").classList.remove("hidden");
 }
+
+function showData(classNum) {
+    let data = classData[classNum];
+
+    let output = "";
+    data.forEach(id => {
+        output += `<p>${id}</p>`;
+    });
+
+    document.getElementById("classPage").classList.add("hidden");
+    document.getElementById("dataPage").classList.remove("hidden");
+    document.getElementById("dataBox").innerHTML = output;
+}
+
+function goBack() {
+    document.getElementById("dataPage").classList.add("hidden");
+    document.getElementById("classPage").classList.remove("hidden");
+}
+
 </script>
 
 </body>
